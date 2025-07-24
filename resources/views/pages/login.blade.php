@@ -108,8 +108,21 @@
             <p>Dinas Perumahan Rakyat dan Kawasan Permukiman Provinsi Kalimantan Barat</p>
             <form action="{{ route('login') }}" method="POST">
                 @csrf
-                <input type="text" name="username" placeholder="Username / NIP" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" class="form-control form-control-user @error('nip') is-invalid @enderror"
+                                    id="exampleInputEmail" name="nip" value="{{ old('nip') }}" aria-describedby="emailHelp"
+                                    placeholder="Enter nip Address...">
+                                @error('nip')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                    id="exampleInputPassword" name="password" placeholder="Password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                 <button type="submit">Masuk</button>
             </form>
             <div class="small-text">
