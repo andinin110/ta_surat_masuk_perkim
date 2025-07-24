@@ -7,8 +7,7 @@
         <h1 class="h3 mb-2 text-gray-800">Tabel Data Surat Keluar</h1>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">Data Surat Keluar</h6>
+            <div class="card-header py-3 d-flex justify-content-start align-items-center">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
                     Tambah Data
                 </button>

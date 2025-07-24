@@ -15,24 +15,19 @@ use App\Http\Middleware\CheckAdminBidang;
 use App\Http\Middleware\CheckUserRoleAndBidang;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', function () {
+    Route::get('/', function () {
     return redirect()->route('login');
 });
 
-
-
-
-
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+    require __DIR__ . '/auth.php';
 
-Route::middleware(['auth', CheckAdminBidang::class])->group(function () {
+    Route::middleware(['auth', CheckAdminBidang::class])->group(function () {
     Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');
     Route::post('/bidang/store', [BidangController::class, 'store'])->name('bidang.store');
     Route::put('/bidang/update/{id}', [BidangController::class, 'update'])->name('bidang.update');
@@ -67,13 +62,20 @@ Route::middleware(['auth', CheckAdminBidang::class])->group(function () {
     Route::post('/peran/store', [DataPeranController::class, 'store'])->name('peran.store');
     Route::put('/peran/update/{id}', [DataPeranController::class, 'update'])->name('peran.update');
     Route::delete('/peran/delete/{id}', [DataPeranController::class, 'destroy'])->name('peran.destroy');
-
+    Route::get('/disposisi/{id}/qrcode', [DisposisiController::class, 'qrcode'])->name('disposisi.qrcode');
+    Route::get('/disposisi/view/{id}', [DisposisiController::class, 'viewFromQR'])->name('disposisi.view');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 
-Route::middleware(['auth', CheckUserRoleAndBidang::class])->group(function () {
+    Route::middleware(['auth', CheckUserRoleAndBidang::class])->group(function () {
     Route::get('/dashboard-user', [UserDashboardController::class, 'index'])->name('userdashboard.index');
     Route::get('/disposisi-user', [UserDisposisiController::class, 'index'])->name('userdisposisi.index');
+
+
+    // Route::get('/disposisi/qrcode/{id}', [DisposisiController::class, 'qrcode'])->name('disposisi.qrcode');
+    Route::get('/disposisi/view/{id}', [DisposisiController::class, 'viewFromQR'])->name('disposisi.view');
     Route::post('/disposisi/update-status/{id}', [UserDisposisiController::class, 'updateStatus'])->name('disposisi.updateStatus');
+    Route::get('/disposisi/{id}/edit', [DisposisiController::class, 'edit'])->name('disposisi.edit');
+
 });

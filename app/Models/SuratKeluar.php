@@ -12,19 +12,22 @@ class SuratKeluar extends Model
     protected $table = 'surat_keluar';
 
     protected $fillable = [
-        'dikirim_melalui',
-        'jenis_naskah',
+        'nomor_surat',
         'sifat_naskah',
-        'klasifikasi',
-        'hal',
         'isi_ringkasan',
+        'asal_surat',
         'tujuan',
-        'verifikator',
-        'tanggal_keluar',
+        'tanggal_terima',
+        'waktu_terima',
+        'batas_berakhir',
+        'waktu_berakhir',
+        'catatan',
+        'eviden',
     ];
 
     protected $dates = [
-        'tanggal_keluar',
+        'tanggal_terima',
+        'batas_berakhir',
         'created_at',
         'updated_at',
     ];

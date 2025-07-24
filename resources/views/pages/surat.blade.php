@@ -7,13 +7,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tabel Data surat</h1>
+        <h1 class="h3 mb-2 text-gray-800">Tabel Data Surat Masuk</h1>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data surat</h6>
-                <div class="mt-3">
+                <div class="mt-2">
                     <!-- Tombol Tambah Data -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
                         Tambah Data
@@ -62,7 +61,7 @@
                                     <td>
                                         @if ($surat->disposisi && $surat->disposisi->eviden)
                                         <span class="">
-                                            <a href="{{ asset('storage/' . $surat->disposisi->eviden) }}"
+                                            <a href="{{ asset('storage/' . $surat->disposisi->eviden) }} "
                                                 target="_blank">Lihat File</a>
                                         </span>
                                     @else
@@ -95,16 +94,15 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel{{ $surat->id }}">Edit Data
-                                                    Surat</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <h5 class="modal-title" id="editModalLabel{{ $surat->id }}">Edit Data Surat</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
                                             <form action="{{ route('surat.update', $surat->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT') <!-- Menggunakan method PUT untuk update -->
                                                 <div class="modal-body">
-
                                                     <!-- Input untuk Nomor Surat -->
                                                     <div class="mb-3">
                                                         <label for="nomor_surat" class="form-label">Nomor Surat</label>
@@ -112,7 +110,6 @@
                                                             value="{{ old('nomor_surat', $surat->nomor_surat) }}"
                                                             placeholder="Masukkan Nomor Surat" required>
                                                     </div>
-
                                                     <!-- Input untuk Sifat Surat -->
                                                     <div class="mb-3">
                                                         <label for="sifat_surat" class="form-label">Sifat Surat</label>
@@ -120,7 +117,6 @@
                                                             value="{{ old('sifat_surat', $surat->sifat_surat) }}"
                                                             placeholder="Masukkan Sifat Surat" required>
                                                     </div>
-
                                                     <!-- Input untuk Isi Ringkasan -->
                                                     <div class="mb-3">
                                                         <label for="isi_ringkasan" class="form-label">Isi Ringkasan</label>
@@ -128,7 +124,6 @@
                                                             value="{{ old('isi_ringkasan', $surat->isi_ringkasan) }}"
                                                             placeholder="Masukkan Isi Ringkasan Surat" required>
                                                     </div>
-
                                                     <!-- Input untuk Dari -->
                                                     <div class="mb-3">
                                                         <label for="dari" class="form-label">Dari</label>
@@ -136,7 +131,6 @@
                                                             value="{{ old('dari', $surat->dari) }}"
                                                             placeholder="Masukkan Dari" required>
                                                     </div>
-
                                                     <!-- Input untuk Kepada -->
                                                     <div class="mb-3">
                                                         <label for="kepada" class="form-label">Kepada</label>
@@ -144,21 +138,16 @@
                                                             value="{{ old('kepada', $surat->kepada) }}"
                                                             placeholder="Masukkan Kepada" required>
                                                     </div>
-
                                                     <!-- Input untuk Tanggal Terima -->
                                                     <div class="mb-3">
                                                         <label for="tanggal_terima" class="form-label">Tanggal Berakhir</label>
                                                         <input type="datetime-local" class="form-control" name="tanggal_terima" value="{{ old('tanggal_terima', $surat->tanggal_terima ? $surat->tanggal_terima->format('Y-m-d\TH:i') : '') }}" required>
                                                     </div>
-
-
                                                     <!-- Input untuk Tanggal Berakhir -->
                                                     <div class="mb-3">
                                                         <label for="tanggal_berakhir" class="form-label">Tanggal Berakhir</label>
                                                         <input type="datetime-local" class="form-control" name="tanggal_berakhir" value="{{ old('tanggal_berakhir', $surat->tanggal_berakhir ? $surat->tanggal_berakhir->format('Y-m-d\TH:i') : '') }}" required>
                                                     </div>
-
-
                                                     <!-- Input untuk Catatan -->
                                                     <div class="mb-3">
                                                         <label for="catatan" class="form-label">Catatan</label>
@@ -169,7 +158,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Tutup</button>
+                                                        data-dismiss="modal">Tutup</button>
                                                     <button type="submit" class="btn btn-primary">Perbarui Data</button>
                                                 </div>
                                             </form>
@@ -183,15 +172,17 @@
             </div>
         </div>
 
-
     </div>
 
+    <!-- Modal Tambah Surat -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Tambah Data Surat</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> <!-- Tombol Exit -->
+                    </button>
                 </div>
                 <form action="{{ route('surat.store') }}" method="POST">
                     @csrf
@@ -231,21 +222,16 @@
                                 required>
                         </div>
 
-                        <!-- Input untuk Hal -->
-
-                        <!-- Input untuk Tujuan -->
-
                          <!-- Input untuk Tanggal Terima -->
                          <div class="mb-3">
-                            <label for="tanggal_terima" class="form-label">Tanggal Berakhir</label>
-                            <input type="datetime-local" class="form-control" name="tanggal_terima" }}" required>
+                            <label for="tanggal_terima" class="form-label">Tanggal Terima</label>
+                            <input type="datetime-local" class="form-control" name="tanggal_terima" required>
                         </div>
-
 
                         <!-- Input untuk Tanggal Berakhir -->
                         <div class="mb-3">
                             <label for="tanggal_berakhir" class="form-label">Tanggal Berakhir</label>
-                            <input type="datetime-local" class="form-control" name="tanggal_berakhir" }}" required>
+                            <input type="datetime-local" class="form-control" name="tanggal_berakhir" required>
                         </div>
 
                         <!-- Input untuk Catatan -->
@@ -256,7 +242,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                     </div>
                 </form>

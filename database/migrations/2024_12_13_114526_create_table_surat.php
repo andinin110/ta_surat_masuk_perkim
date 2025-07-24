@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tanggal_terima');
             $table->date('tanggal_berakhir');
             $table->string('catatan');
+            $table->unsignedBigInteger('id_bidang')->nullable(); // tambahkan ini
             $table->timestamps();
         });
     }

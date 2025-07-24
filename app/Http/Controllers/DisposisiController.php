@@ -6,6 +6,8 @@ use App\Models\Bidang;
 use App\Models\Disposisi;
 use App\Models\Surat;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class DisposisiController extends Controller
 {
@@ -90,5 +92,22 @@ public function destroy($id)
     // Redirect ke halaman index dengan pesan sukses
     return redirect()->route('disposisi.index')->with('success', 'Data surat berhasil dihapus!');
 }
+public function qrcode($id)
+{
+    try {
+        // Ambil data disposisi beserta relasinya
+        $disposisi = Disposisi::with(['bidang', 'surat'])->findOrFail($id);
+
+        // Data yang akan dimasukkan ke dalam QR Code (misalnya link detail disposisi)
+        $qrData = route('disposisi.view', $id); // link menuju view detail
+
+        // Kirim ke view dengan data disposisi dan QR code
+        return view('pages.qrcode', compact('disposisi', 'qrData'));
+    } catch (\Exception $e) {
+        return redirect()->route('disposisi.index')->with('error', 'Data disposisi tidak ditemukan.');
+    }
+}
+
+
 }
 

@@ -10,21 +10,21 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Tabel Data Peran</h1>
+
         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Peran</h6>
-                <div class="mt-3">
+                <div class="mt-2">
                     <!-- Tombol Tambah Data -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
                         Tambah Data
@@ -72,9 +72,11 @@
                             <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Peran</h5>
-                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-header d-flex justify-content-between align-items-center">
+                                            <h5 class="modal-title mb-0" id="editModalLabel{{ $item->id }}">Edit Peran</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
                                         <form action="{{ route('peran.update', $item->id) }}" method="POST">
                                             @csrf
@@ -100,7 +102,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
 
@@ -111,9 +112,11 @@
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Tambah Data Peran</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title mb-0" id="addModalLabel">Tambah Data Peran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form action="{{ route('peran.store') }}" method="POST">
                     @csrf
@@ -128,7 +131,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                     </div>
                 </form>

@@ -22,7 +22,6 @@ class UserDisposisiController extends Controller
         // Ambil bidang dan sub-bidang yang terkait dengan pengguna (untuk menampilkan data bidang)
         $bidangs = Bidang::where('id', $idBidangUser)->get();
 
-
         // Kirim data ke view
         return view('pages.user.disposisi', compact('disposisi', 'surats', 'bidangs'));
     }

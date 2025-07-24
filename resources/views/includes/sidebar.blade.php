@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-10">
             <i class="fa fa-file-text-o"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Surat Masuk</div>
+        <div class="sidebar-brand-text mx-3">Surat Menyurat</div>
     </a>
 
     <!-- Divider -->
